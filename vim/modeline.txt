@@ -1,0 +1,2 @@
+/* -*- coding: utf-8-unix -*- */
+// vim: et fenc=utf-8 ff=unix sw=2 ts=2 sts=2
