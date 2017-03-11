@@ -1,0 +1,19 @@
+" 基本的なファイルの読み書きはeucで行いたいが、たまにutf-8のファイルも扱いたいときの設定
+set encoding=euc-jp
+set fileencodings=utf-8,euc-jp
+
+"ASCIIのみで書かれたファイルをeuc-jpで読み書きするための設定
+"  ・本設定がない場合は以下の現象が起きる。
+"      ASCIIのファイルを開く->fileencodingsの自動判別によりutf-8に変換
+"      ->日本語を入力->utf-8で保存される
+"  ・本設定によりASCIIのファイルを開いた場合でも、
+"    utf-8->euc-jpへの変換は行われるため[変換済]と表示されるが
+"    fileencodingはeuc-jpであり、問題はない。
+if has('autocmd')
+  function! AU_ReCheck_FENC()
+    if &fileencoding =~# 'utf-8' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding=&encoding
+    endif
+  endfunction
+  autocmd BufReadPost * call AU_ReCheck_FENC()
+endif
