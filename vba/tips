@@ -1,0 +1,35 @@
+'描画のON/OFF
+Application.ScreenUpdating = True
+Application.ScreenUpdating = False
+
+'辞書作成
+Dim Dic As Object
+Set Dic = CreateObject("Scripting.Dictionary")
+
+'辞書のforeach
+For Each key In Dic
+    MsgBox "key:" & key & " name:" & Dic.Item(key)
+Next
+
+'ブックに存在するシート名を出力
+For Each currentSheet In Worksheets
+    MsgBox "Index :" & currentSheet.Index & " Name:" & currentSheet.Name
+Next
+
+'Rangeの行、列を値で指定
+Range(Cells(1, 1).Address(False, False), Cells(2, 2).Address(False, False)).Select
+
+'印刷範囲の設定
+Dim printAreaRange As String
+printAreaRange = Cells(1, 1).Address(False, False) & ":" & Cells(2, 2).Address(False, False)
+ActiveSheet.PageSetup.PrintArea = printAreaRange
+
+'ワークシート越しのコピー
+Worksheets("Sheet1").Range("$A1:$B2").Copy Destination:=Range("$A1")
+
+'セルの連結
+Range("$A1:$B2").MergeCells = True
+
+'シートのコピー
+Sheets("Sheet1").Copy After:=Sheets("Sheet2")
+ActiveSheet.Name = "Sheet3"
