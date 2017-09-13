@@ -1,0 +1,5 @@
+# 連想配列を用いたファイルの一括読み込みと一行ずつの書き出し(bash ver4.x以上限定）
+mapfile -t TEXT < memo.txt
+for ((I=0; I < ${#TEXT[@]}; ++I)); do
+  echo ${TEXT[$I]}
+done
