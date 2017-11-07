@@ -1,2 +1,2 @@
-# Tips
-自分の備忘録なのであまり見る価値ないです。
+# til
+Today I Learned
