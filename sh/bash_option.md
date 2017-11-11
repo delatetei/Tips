@@ -121,8 +121,22 @@ Type `bash -c help' for more information about shell builtin commands.
 #!/bin/bash
 shopt -s extglob
 
-ls -l ${1}.+([0-9])
+ls ${1}.+([0-9])
 [root@localhost ~]# ./extglob_test.sh hoge
--rw-r--r-- 1 root root 0 Nov  9 22:17 hoge.171109
+hoge.171109
 ```
 日付ファイルが消せる！と言い張れる程の表現力はないけど実用的には問題なさそう。
+
+
+ファイル名に0埋めされた数値がついててそれに入力をマッチさせる、とかは有り得そう。
+```
+[root@localhost ~]# touch 01_hoge
+[root@localhost ~]# cat zero_padding.sh
+#!/bin/bash
+shopt -s extglob
+
+ls *(0)${1}_hoge
+
+[root@localhost ~]# ./zero_padding.sh  1
+01_hoge
+```
